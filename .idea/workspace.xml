@@ -46,7 +46,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/User/UserController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
+            <state relative-caret-position="250">
               <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
               <folding>
                 <element signature="e#51#79#0#PHP" expanded="true" />
@@ -221,7 +221,7 @@
       <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="720" />
     <option name="y" value="251" />
     <option name="width" value="1182" />
@@ -402,15 +402,15 @@
       <workItem from="1577184534717" duration="4599000" />
       <workItem from="1577238268245" duration="19622000" />
       <workItem from="1577326495950" duration="13173000" />
-      <workItem from="1577408255677" duration="2708000" />
+      <workItem from="1577408255677" duration="3307000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47625000" />
+    <option name="totallyTimeSpent" value="48224000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="720" y="251" width="1182" height="799" extended-state="0" />
+    <frame x="720" y="251" width="1182" height="799" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.22280702" />
@@ -646,7 +646,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/User/UserController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
+        <state relative-caret-position="250">
           <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
           <folding>
             <element signature="e#51#79#0#PHP" expanded="true" />
