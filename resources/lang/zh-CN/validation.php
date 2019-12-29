@@ -96,6 +96,7 @@ return [
     'present'              => ':attribute 必须存在。',
     'regex'                => ':attribute 格式不正确。',
     'required'             => ':attribute 不能为空。',
+    'captcha'             => ':attribute 输入错误。',
     'required_if'          => '当 :other 为 :value 时 :attribute 不能为空。',
     'required_unless'      => '当 :other 不为 :values 时 :attribute 不能为空。',
     'required_with'        => '当 :values 存在时 :attribute 不能为空。',
@@ -176,5 +177,6 @@ return [
         'time'                  => '时间',
         'available'             => '可用的',
         'size'                  => '大小',
+        'code'                  => '验证码',
     ],
 ];

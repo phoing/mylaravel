@@ -6,15 +6,42 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Model\Admin\User;
+# 图片缩放
+use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
     # 列表页
     public function index()
     {
-        if(!session()->has('admin.user')){
-            return redirect(route('admin.login.login'))->with('message','非法登录');
-        }
+//        $userModel = User::find(1);
+//        dd($userModel->userextinfo()->first());
+//        dd($userModel->userextinfo);
+
+//        $userModel = User::where('id',1)->with('userextinfo')->first();
+//        $userModel = User::where('id',1)->with('userextinfo:user_id,body')->first();
+//        $userModel = User::where('id',1)->with(['userextinfo'=>function($query){}])->first();
+//        dd($userModel);
+
+//        $arts = User::find(1);
+//        dd($arts->arts()->get()->toArray());
+//        dd($arts->arts->toArray());
+//        $arts = User::where('id',1)->with('arts')->first();
+//        $arts = User::where('id',1)->with('arts:user_id,title')->first();
+//        $arts = User::where('id',1)->with(['arts'=>function($query){
+//            $query->where('title','like',"%法%");
+//        }])->first();
+//        dd($arts->toArray());
+
+//        $admins = User::find(1);
+//        $ret = $admins->auths()->pluck('name','user_id');
+//        dd($ret->toArray());
+
+//        $date = cache()->remember('data',5,function (){
+//            return User::all();
+//        });
+//        dump($date->toArray());
+
         $data = User::orderBy('id','desc')->paginate(3);
         return view('admin.user.index',compact('data'));
     }
@@ -22,23 +49,32 @@ class UserController extends Controller
     # 添加页面
     public function create()
     {
-        if(!session()->has('admin.user')){
-            return redirect(route('admin.login.login'))->with('message','非法登录');
-        }
         return view('admin.user.create');
     }
     # 添加数据
     public function store(Request $request)
     {
-        if(!session()->has('admin.user')){
-            return redirect(route('admin.login.login'))->with('message','非法登录');
-        }
         $data = $this->validate($request,[
             'username' => 'required',
             'password' => 'required|confirmed',
             'email' => 'required|email',
             'sex' => 'required|between:1,2'
         ]);
+
+//        dump($file);die;
+        if($request->hasFile('pic')){
+            $file = $request->file('pic');
+            /*$ext = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $ext;
+            $file->move(public_path('uploads'),$filename);*/
+
+            $filename = $file->store('','user');
+            $data['pic'] = '/uploads/' . $filename;
+
+            # 图片缩放
+            $img = Image::make(public_path($data['pic']));
+            $img->resize(100,100)->save(public_path($data['pic']),100);
+        }
 
         $model = User::create($data);
 
@@ -48,9 +84,6 @@ class UserController extends Controller
     # 修改页面
     public function edit(int $id)
     {
-        if(!session()->has('admin.user')){
-            return redirect(route('admin.login.login'))->with('message','非法登录');
-        }
         $data = User::find($id);
 
         return view('admin.user.edit',compact('data'));
@@ -58,9 +91,6 @@ class UserController extends Controller
     # 修改数据
     public function update(Request $request,int $id)
     {
-        if(!session()->has('admin.user')){
-            return redirect(route('admin.login.login'))->with('message','非法登录');
-        }
         $data = $this->validate($request,[
             'username' => 'required',
             'email' => 'required|email',
@@ -74,9 +104,6 @@ class UserController extends Controller
     # 删除数据
     public function delete(int $id)
     {
-        if(!session()->has('admin.user')){
-            return redirect(route('admin.login.login'))->with('message','非法登录');
-        }
         $res = User::destroy($id);
 
         return redirect(route('admin.user.index'))->with('message','删除成功');
@@ -85,9 +112,6 @@ class UserController extends Controller
     # 回收站
     public function trash()
     {
-        if(!session()->has('admin.user')){
-            return redirect(route('admin.login.login'))->with('message','非法登录');
-        }
         $data = User::onlyTrashed()->paginate(3);
 
         return view('admin.user.trash',compact('data'));
@@ -96,9 +120,6 @@ class UserController extends Controller
     # 恢复
     public function recover(int $id)
     {
-        if(!session()->has('admin.user')){
-            return redirect(route('admin.login.login'))->with('message','非法登录');
-        }
         $res = User::where('id',$id)->onlyTrashed()->first();
         $res->restore();
 
@@ -108,9 +129,6 @@ class UserController extends Controller
     # 真实删除
     public function destroy(int $id)
     {
-        if(!session()->has('admin.user')){
-            return redirect(route('admin.login.login'))->with('message','非法登录');
-        }
         $res = User::where('id',$id)->onlyTrashed()->first();
         $res->forceDelete();
 

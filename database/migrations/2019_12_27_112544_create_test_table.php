@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterTableUsers extends Migration
+class CreateTestTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AlterTableUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('password',255)->default('')->comment('密码');
+        Schema::create('userext', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('user_id')->default(0)->comment('用户id');
+            $table->text('body')->comment('描述');
+            $table->timestamps();
         });
     }
 
@@ -25,9 +28,6 @@ class AlterTableUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            # 如果没有写，回滚的时候不会删除字段
-            $table->dropColumn('password');
-        });
+        Schema::dropIfExists('userext');
     }
 }

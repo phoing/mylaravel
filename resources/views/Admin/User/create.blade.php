@@ -25,7 +25,7 @@
         @endforeach
     </div>
     @endif
-    <form action="{{ route('admin.user.store') }}" method="post">
+    <form action="{{ route('admin.user.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group row">
             <label for="staticEmail" class="col-sm-2 col-form-label">账号</label>
@@ -61,6 +61,12 @@
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="sex" id="inlineRadio2" value="2" @if(old('sex')==2) checked @endif>
                 <label class="form-check-label" for="inlineRadio2">女</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">头像</label>
+            <div class="col-sm-10">
+                <input type="file" name="pic" id="">
             </div>
         </div>
         <button type="submit" class="btn btn-primary">添加</button>

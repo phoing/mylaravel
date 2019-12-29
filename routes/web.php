@@ -54,11 +54,11 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function (){
         # 登录页面
         Route::get('login','LoginController@index')->name('admin.login.index');
         # 提交验证
-        Route::post('login','LoginController@login')->name('admin.login.login');
+        Route::post('login','LoginController@login')->name('admin.login.login')->middleware('loginlogs');
     });
 
     # User路由
-    Route::group(['prefix' => 'user','namespace' => 'User'],function (){
+    Route::group(['prefix' => 'user','namespace' => 'User','middleware'=>'cklogin'],function (){
         # 列表页面
         Route::get('index','UserController@index')->name('admin.user.index');
         # 添加页面

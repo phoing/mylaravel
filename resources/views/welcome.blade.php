@@ -80,8 +80,8 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    <a href="{{ route('admin.login.login') }}">点击进入登录后台管理</a>
+                <div class="title m-b-md" style="cursor: pointer;" onclick="location.href='{{ route('admin.user.index') }}'">
+                    点击进入登录后台管理
                 </div>
 
                 <div class="links">
